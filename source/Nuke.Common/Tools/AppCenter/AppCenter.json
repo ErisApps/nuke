@@ -28,6 +28,12 @@
       }
     },
     {
+      "help": "Log out",
+      "postfix": "Logout",
+      "definiteArgument": "logout",
+      "settingsClass": {}
+    },
+    {
       "help": "Upload release binary and trigger distribution, at least one of --store or --group must be specified",
       "postfix": "DistributeRelease",
       "definiteArgument": "distribute release",
