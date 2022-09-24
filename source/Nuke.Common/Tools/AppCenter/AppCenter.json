@@ -1,0 +1,147 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nuke-build/nuke/master/source/Nuke.CodeGeneration/schema.json",
+  "name": "AppCenter",
+  "officialUrl": "https://github.com/Microsoft/appcenter-cli/",
+  "help": "Nuke Tool for AppCenter CLI",
+  "pathExecutable": "appcenter",
+  "tasks": [
+    {
+      "help": "Upload release binary and trigger distribution, at least one of --store or --group must be specified",
+      "postfix": "DistributeRelease",
+      "definiteArgument": "distribute release",
+      "settingsClass": {
+        "properties": [
+          {
+            "name": "File",
+            "type": "string",
+            "format": "--file {value}",
+            "help": "Path to binary file"
+          },
+          {
+            "name": "Timeout",
+            "type": "int",
+            "format": "--timeout {value}",
+            "help": "Timeout for waiting release id (in seconds)"
+          },
+          {
+            "name": "Mandatory",
+            "type": "bool",
+            "format": "--mandatory",
+            "help": "Make the release mandatory for the testers (default is false)"
+          },
+          {
+            "name": "Silent",
+            "type": "bool",
+            "format": "--silent",
+            "help": "Do not notify testers of this release"
+          },
+          {
+            "name": "ReleaseNotesFile",
+            "type": "string",
+            "format": "--release-notes-file {value}",
+            "help": "Path to release notes file (markdown supported, 5000 characters max)"
+          },
+          {
+            "name": "ReleaseNotes",
+            "type": "string",
+            "format": "--release-notes {value}",
+            "help": "Release notes text (5000 characters max)"
+          },
+          {
+            "name": "Store",
+            "type": "string",
+            "format": "--store {value}",
+            "help": "Store name"
+          },
+          {
+            "name": "Group",
+            "type": "List<string>",
+            "format": "--group {value}",
+            "separator": ",",
+            "help": "Comma-separated distribution group names"
+          },
+          {
+            "name": "BuildNumber",
+            "type": "string",
+            "format": "--build-number {value}",
+            "help": "Build number parameter required for macOS .pkg and .dmg files"
+          },
+          {
+            "name": "BuildVersion",
+            "type": "string",
+            "format": "--build-version {value}",
+            "help": "Build version parameter required for .zip, .msi, .pkg and .dmg files"
+          },
+          {
+            "name": "App",
+            "type": "string",
+            "format": "--app {value}",
+            "help": "Specify app in the &lt;ownerName&gt;/&lt;appName&gt; format"
+          }
+        ]
+      }
+    }
+  ],
+  "commonTaskProperties": [
+    {
+      "name": "DisableTelemetry",
+      "type": "bool",
+      "format": "--disable-telemetry",
+      "help": "Disable telemetry for this command"
+    },
+    {
+      "name": "Version",
+      "type": "bool",
+      "format": "--version",
+      "help": "Display AppCenter version"
+    },
+    {
+      "name": "Quiet",
+      "type": "bool",
+      "format": "--quiet",
+      "help": "Auto-confirm any prompts without waiting for input"
+    },
+    {
+      "name": "Help",
+      "type": "bool",
+      "format": "--help",
+      "help": "Display help for current command"
+    },
+    {
+      "name": "Env",
+      "type": "string",
+      "format": "--env {value}",
+      "help": "Environment when using API token"
+    },
+    {
+      "name": "Token",
+      "type": "string",
+      "format": "--token {value}",
+      "secret": true,
+      "help": "API token"
+    },
+    {
+      "name": "Output",
+      "type": "AppCenterDistributeReleaseOutput",
+      "format": "--output {value}",
+      "help": "Output format: json"
+    },
+    {
+      "name": "Debug",
+      "type": "bool",
+      "format": "--debug",
+      "help": "Display extra output for debugging"
+    }
+  ],
+  "enumerations": [
+    {
+      "name": "AppCenterDistributeReleaseOutput",
+      "values": [
+        "json"
+      ]
+    }
+  ],
+  "_metadata": {
+    "version": "2.11.0"
+  }
+}
