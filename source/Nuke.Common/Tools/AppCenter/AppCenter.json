@@ -6,6 +6,28 @@
   "pathExecutable": "appcenter",
   "tasks": [
     {
+      "help": "Log in",
+      "postfix": "Login",
+      "definiteArgument": "login",
+      "settingsClass": {
+        "properties": [
+          {
+            "name": "User",
+            "type": "string",
+            "format": "--user {value}",
+            "help": "Username to log in as"
+          },
+          {
+            "name": "Password",
+            "type": "string",
+            "format": "--password {value}",
+            "secret": true,
+            "help": "Password to log in with"
+          }
+        ]
+      }
+    },
+    {
       "help": "Upload release binary and trigger distribution, at least one of --store or --group must be specified",
       "postfix": "DistributeRelease",
       "definiteArgument": "distribute release",

@@ -44,6 +44,78 @@ namespace Nuke.Common.Tools.AppCenter
             return process.Output;
         }
         /// <summary>
+        ///   <p>Log in</p>
+        ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
+        /// </summary>
+        /// <remarks>
+        ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+        ///   <ul>
+        ///     <li><c>--debug</c> via <see cref="AppCenterLoginSettings.Debug"/></li>
+        ///     <li><c>--disable-telemetry</c> via <see cref="AppCenterLoginSettings.DisableTelemetry"/></li>
+        ///     <li><c>--env</c> via <see cref="AppCenterLoginSettings.Env"/></li>
+        ///     <li><c>--help</c> via <see cref="AppCenterLoginSettings.Help"/></li>
+        ///     <li><c>--output</c> via <see cref="AppCenterLoginSettings.Output"/></li>
+        ///     <li><c>--password</c> via <see cref="AppCenterLoginSettings.Password"/></li>
+        ///     <li><c>--quiet</c> via <see cref="AppCenterLoginSettings.Quiet"/></li>
+        ///     <li><c>--token</c> via <see cref="AppCenterLoginSettings.Token"/></li>
+        ///     <li><c>--user</c> via <see cref="AppCenterLoginSettings.User"/></li>
+        ///     <li><c>--version</c> via <see cref="AppCenterLoginSettings.Version"/></li>
+        ///   </ul>
+        /// </remarks>
+        public static IReadOnlyCollection<Output> AppCenterLogin(AppCenterLoginSettings toolSettings = null)
+        {
+            toolSettings = toolSettings ?? new AppCenterLoginSettings();
+            using var process = ProcessTasks.StartProcess(toolSettings);
+            process.AssertZeroExitCode();
+            return process.Output;
+        }
+        /// <summary>
+        ///   <p>Log in</p>
+        ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
+        /// </summary>
+        /// <remarks>
+        ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+        ///   <ul>
+        ///     <li><c>--debug</c> via <see cref="AppCenterLoginSettings.Debug"/></li>
+        ///     <li><c>--disable-telemetry</c> via <see cref="AppCenterLoginSettings.DisableTelemetry"/></li>
+        ///     <li><c>--env</c> via <see cref="AppCenterLoginSettings.Env"/></li>
+        ///     <li><c>--help</c> via <see cref="AppCenterLoginSettings.Help"/></li>
+        ///     <li><c>--output</c> via <see cref="AppCenterLoginSettings.Output"/></li>
+        ///     <li><c>--password</c> via <see cref="AppCenterLoginSettings.Password"/></li>
+        ///     <li><c>--quiet</c> via <see cref="AppCenterLoginSettings.Quiet"/></li>
+        ///     <li><c>--token</c> via <see cref="AppCenterLoginSettings.Token"/></li>
+        ///     <li><c>--user</c> via <see cref="AppCenterLoginSettings.User"/></li>
+        ///     <li><c>--version</c> via <see cref="AppCenterLoginSettings.Version"/></li>
+        ///   </ul>
+        /// </remarks>
+        public static IReadOnlyCollection<Output> AppCenterLogin(Configure<AppCenterLoginSettings> configurator)
+        {
+            return AppCenterLogin(configurator(new AppCenterLoginSettings()));
+        }
+        /// <summary>
+        ///   <p>Log in</p>
+        ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
+        /// </summary>
+        /// <remarks>
+        ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+        ///   <ul>
+        ///     <li><c>--debug</c> via <see cref="AppCenterLoginSettings.Debug"/></li>
+        ///     <li><c>--disable-telemetry</c> via <see cref="AppCenterLoginSettings.DisableTelemetry"/></li>
+        ///     <li><c>--env</c> via <see cref="AppCenterLoginSettings.Env"/></li>
+        ///     <li><c>--help</c> via <see cref="AppCenterLoginSettings.Help"/></li>
+        ///     <li><c>--output</c> via <see cref="AppCenterLoginSettings.Output"/></li>
+        ///     <li><c>--password</c> via <see cref="AppCenterLoginSettings.Password"/></li>
+        ///     <li><c>--quiet</c> via <see cref="AppCenterLoginSettings.Quiet"/></li>
+        ///     <li><c>--token</c> via <see cref="AppCenterLoginSettings.Token"/></li>
+        ///     <li><c>--user</c> via <see cref="AppCenterLoginSettings.User"/></li>
+        ///     <li><c>--version</c> via <see cref="AppCenterLoginSettings.Version"/></li>
+        ///   </ul>
+        /// </remarks>
+        public static IEnumerable<(AppCenterLoginSettings Settings, IReadOnlyCollection<Output> Output)> AppCenterLogin(CombinatorialConfigure<AppCenterLoginSettings> configurator, int degreeOfParallelism = 1, bool completeOnFailure = false)
+        {
+            return configurator.Invoke(AppCenterLogin, AppCenterLogger, degreeOfParallelism, completeOnFailure);
+        }
+        /// <summary>
         ///   <p>Upload release binary and trigger distribution, at least one of --store or --group must be specified</p>
         ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
         /// </summary>
@@ -143,6 +215,78 @@ namespace Nuke.Common.Tools.AppCenter
             return configurator.Invoke(AppCenterDistributeRelease, AppCenterLogger, degreeOfParallelism, completeOnFailure);
         }
     }
+    #region AppCenterLoginSettings
+    /// <summary>
+    ///   Used within <see cref="AppCenterTasks"/>.
+    /// </summary>
+    [PublicAPI]
+    [ExcludeFromCodeCoverage]
+    [Serializable]
+    public partial class AppCenterLoginSettings : ToolSettings
+    {
+        /// <summary>
+        ///   Path to the AppCenter executable.
+        /// </summary>
+        public override string ProcessToolPath => base.ProcessToolPath ?? AppCenterTasks.AppCenterPath;
+        public override Action<OutputType, string> ProcessCustomLogger => AppCenterTasks.AppCenterLogger;
+        /// <summary>
+        ///   Username to log in as
+        /// </summary>
+        public virtual string User { get; internal set; }
+        /// <summary>
+        ///   Password to log in with
+        /// </summary>
+        public virtual string Password { get; internal set; }
+        /// <summary>
+        ///   Disable telemetry for this command
+        /// </summary>
+        public virtual bool? DisableTelemetry { get; internal set; }
+        /// <summary>
+        ///   Display AppCenter version
+        /// </summary>
+        public virtual bool? Version { get; internal set; }
+        /// <summary>
+        ///   Auto-confirm any prompts without waiting for input
+        /// </summary>
+        public virtual bool? Quiet { get; internal set; }
+        /// <summary>
+        ///   Display help for current command
+        /// </summary>
+        public virtual bool? Help { get; internal set; }
+        /// <summary>
+        ///   Environment when using API token
+        /// </summary>
+        public virtual string Env { get; internal set; }
+        /// <summary>
+        ///   API token
+        /// </summary>
+        public virtual string Token { get; internal set; }
+        /// <summary>
+        ///   Output format: json
+        /// </summary>
+        public virtual AppCenterDistributeReleaseOutput Output { get; internal set; }
+        /// <summary>
+        ///   Display extra output for debugging
+        /// </summary>
+        public virtual bool? Debug { get; internal set; }
+        protected override Arguments ConfigureProcessArguments(Arguments arguments)
+        {
+            arguments
+              .Add("login")
+              .Add("--user {value}", User)
+              .Add("--password {value}", Password, secret: true)
+              .Add("--disable-telemetry", DisableTelemetry)
+              .Add("--version", Version)
+              .Add("--quiet", Quiet)
+              .Add("--help", Help)
+              .Add("--env {value}", Env)
+              .Add("--token {value}", Token, secret: true)
+              .Add("--output {value}", Output)
+              .Add("--debug", Debug);
+            return base.ConfigureProcessArguments(arguments);
+        }
+    }
+    #endregion
     #region AppCenterDistributeReleaseSettings
     /// <summary>
     ///   Used within <see cref="AppCenterTasks"/>.
@@ -259,6 +403,421 @@ namespace Nuke.Common.Tools.AppCenter
               .Add("--debug", Debug);
             return base.ConfigureProcessArguments(arguments);
         }
+    }
+    #endregion
+    #region AppCenterLoginSettingsExtensions
+    /// <summary>
+    ///   Used within <see cref="AppCenterTasks"/>.
+    /// </summary>
+    [PublicAPI]
+    [ExcludeFromCodeCoverage]
+    public static partial class AppCenterLoginSettingsExtensions
+    {
+        #region User
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.User"/></em></p>
+        ///   <p>Username to log in as</p>
+        /// </summary>
+        [Pure]
+        public static T SetUser<T>(this T toolSettings, string user) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.User = user;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.User"/></em></p>
+        ///   <p>Username to log in as</p>
+        /// </summary>
+        [Pure]
+        public static T ResetUser<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.User = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Password
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Password"/></em></p>
+        ///   <p>Password to log in with</p>
+        /// </summary>
+        [Pure]
+        public static T SetPassword<T>(this T toolSettings, [Secret] string password) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Password = password;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Password"/></em></p>
+        ///   <p>Password to log in with</p>
+        /// </summary>
+        [Pure]
+        public static T ResetPassword<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Password = null;
+            return toolSettings;
+        }
+        #endregion
+        #region DisableTelemetry
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T SetDisableTelemetry<T>(this T toolSettings, bool? disableTelemetry) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = disableTelemetry;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T ResetDisableTelemetry<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterLoginSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T EnableDisableTelemetry<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterLoginSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T DisableDisableTelemetry<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterLoginSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleDisableTelemetry<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = !toolSettings.DisableTelemetry;
+            return toolSettings;
+        }
+        #endregion
+        #region Version
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T SetVersion<T>(this T toolSettings, bool? version) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = version;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T ResetVersion<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterLoginSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T EnableVersion<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterLoginSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T DisableVersion<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterLoginSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleVersion<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = !toolSettings.Version;
+            return toolSettings;
+        }
+        #endregion
+        #region Quiet
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T SetQuiet<T>(this T toolSettings, bool? quiet) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = quiet;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T ResetQuiet<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterLoginSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T EnableQuiet<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterLoginSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T DisableQuiet<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterLoginSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleQuiet<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = !toolSettings.Quiet;
+            return toolSettings;
+        }
+        #endregion
+        #region Help
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T SetHelp<T>(this T toolSettings, bool? help) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = help;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T ResetHelp<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterLoginSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T EnableHelp<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterLoginSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T DisableHelp<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterLoginSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleHelp<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = !toolSettings.Help;
+            return toolSettings;
+        }
+        #endregion
+        #region Env
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Env"/></em></p>
+        ///   <p>Environment when using API token</p>
+        /// </summary>
+        [Pure]
+        public static T SetEnv<T>(this T toolSettings, string env) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Env = env;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Env"/></em></p>
+        ///   <p>Environment when using API token</p>
+        /// </summary>
+        [Pure]
+        public static T ResetEnv<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Env = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Token
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Token"/></em></p>
+        ///   <p>API token</p>
+        /// </summary>
+        [Pure]
+        public static T SetToken<T>(this T toolSettings, [Secret] string token) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Token = token;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Token"/></em></p>
+        ///   <p>API token</p>
+        /// </summary>
+        [Pure]
+        public static T ResetToken<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Token = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Output
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Output"/></em></p>
+        ///   <p>Output format: json</p>
+        /// </summary>
+        [Pure]
+        public static T SetOutput<T>(this T toolSettings, AppCenterDistributeReleaseOutput output) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Output = output;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Output"/></em></p>
+        ///   <p>Output format: json</p>
+        /// </summary>
+        [Pure]
+        public static T ResetOutput<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Output = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Debug
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterLoginSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T SetDebug<T>(this T toolSettings, bool? debug) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = debug;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterLoginSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T ResetDebug<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterLoginSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T EnableDebug<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterLoginSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T DisableDebug<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterLoginSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleDebug<T>(this T toolSettings) where T : AppCenterLoginSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = !toolSettings.Debug;
+            return toolSettings;
+        }
+        #endregion
     }
     #endregion
     #region AppCenterDistributeReleaseSettingsExtensions
