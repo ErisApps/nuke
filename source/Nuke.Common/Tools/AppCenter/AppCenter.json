@@ -34,6 +34,51 @@
       "settingsClass": {}
     },
     {
+      "help": "Create a new app",
+      "postfix": "AppsCreate",
+      "definiteArgument": "apps create",
+      "settingsClass": {
+        "properties": [
+          {
+            "name": "Platform",
+            "type": "AppCenterAppsCreatePlatform",
+            "format": "--platform {value}",
+            "help": "The platform of the app. Supported values: Cordova, Java, Objective-C-Swift, React-Native, Unity, UWP, WinForms, WPF, Xamarin, Custom"
+          },
+          {
+            "name": "OS",
+            "type": "AppCenterAppsCreateOS",
+            "format": "--os {value}",
+            "help": "The OS the app will be running on. Supported values: Android, Custom, iOS, macOS, tvOS, Windows"
+          },
+          {
+            "name": "DisplayName",
+            "type": "string",
+            "format": "--display-name {value}",
+            "help": "The descriptive name of the app. This can contain any characters"
+          },
+          {
+            "name": "ReleaseType",
+            "type": "AppCenterAppsCreateReleaseType",
+            "format": "--release-type {value}",
+            "help": "The app release type. Suggested values are Alpha, Beta, Production, Store, Enterprise. Custom values are allowed and must be must be one word, alphanumeric, first letter capitalized."
+          },
+          {
+            "name": "Name",
+            "type": "string",
+            "format": "--name {value}",
+            "help": "The name of the app used in URLs. Can optionally be provided specifically, otherwise a generated name will be derived from display-name"
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "format": "--description {value}",
+            "help": "The description of the app"
+          }
+        ]
+      }
+    },
+    {
       "help": "Upload release binary and trigger distribution, at least one of --store or --group must be specified",
       "postfix": "DistributeRelease",
       "definiteArgument": "distribute release",
@@ -162,6 +207,40 @@
     }
   ],
   "enumerations": [
+    {
+      "name": "AppCenterAppsCreatePlatform",
+      "values": [
+        "Cordova",
+        "Java",
+        "Objective-C-Swift",
+        "React-Native",
+        "Unity",
+        "UWP",
+        "Xamarin",
+        "Custom"
+      ]
+    },
+    {
+      "name": "AppCenterAppsCreateOS",
+      "values": [
+        "Android",
+        "Custom",
+        "iOS",
+        "macOS",
+        "tvOS",
+        "Windows"
+      ]
+    },
+    {
+      "name": "AppCenterAppsCreateReleaseType",
+      "values": [
+        "Alpha",
+        "Beta",
+        "Production",
+        "Store",
+        "Enterprise"
+      ]
+    },
     {
       "name": "AppCenterDistributeReleaseOutput",
       "values": [

@@ -182,6 +182,90 @@ namespace Nuke.Common.Tools.AppCenter
             return configurator.Invoke(AppCenterLogout, AppCenterLogger, degreeOfParallelism, completeOnFailure);
         }
         /// <summary>
+        ///   <p>Create a new app</p>
+        ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
+        /// </summary>
+        /// <remarks>
+        ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+        ///   <ul>
+        ///     <li><c>--debug</c> via <see cref="AppCenterAppsCreateSettings.Debug"/></li>
+        ///     <li><c>--description</c> via <see cref="AppCenterAppsCreateSettings.Description"/></li>
+        ///     <li><c>--disable-telemetry</c> via <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></li>
+        ///     <li><c>--display-name</c> via <see cref="AppCenterAppsCreateSettings.DisplayName"/></li>
+        ///     <li><c>--env</c> via <see cref="AppCenterAppsCreateSettings.Env"/></li>
+        ///     <li><c>--help</c> via <see cref="AppCenterAppsCreateSettings.Help"/></li>
+        ///     <li><c>--name</c> via <see cref="AppCenterAppsCreateSettings.Name"/></li>
+        ///     <li><c>--os</c> via <see cref="AppCenterAppsCreateSettings.OS"/></li>
+        ///     <li><c>--output</c> via <see cref="AppCenterAppsCreateSettings.Output"/></li>
+        ///     <li><c>--platform</c> via <see cref="AppCenterAppsCreateSettings.Platform"/></li>
+        ///     <li><c>--quiet</c> via <see cref="AppCenterAppsCreateSettings.Quiet"/></li>
+        ///     <li><c>--release-type</c> via <see cref="AppCenterAppsCreateSettings.ReleaseType"/></li>
+        ///     <li><c>--token</c> via <see cref="AppCenterAppsCreateSettings.Token"/></li>
+        ///     <li><c>--version</c> via <see cref="AppCenterAppsCreateSettings.Version"/></li>
+        ///   </ul>
+        /// </remarks>
+        public static IReadOnlyCollection<Output> AppCenterAppsCreate(AppCenterAppsCreateSettings toolSettings = null)
+        {
+            toolSettings = toolSettings ?? new AppCenterAppsCreateSettings();
+            using var process = ProcessTasks.StartProcess(toolSettings);
+            process.AssertZeroExitCode();
+            return process.Output;
+        }
+        /// <summary>
+        ///   <p>Create a new app</p>
+        ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
+        /// </summary>
+        /// <remarks>
+        ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+        ///   <ul>
+        ///     <li><c>--debug</c> via <see cref="AppCenterAppsCreateSettings.Debug"/></li>
+        ///     <li><c>--description</c> via <see cref="AppCenterAppsCreateSettings.Description"/></li>
+        ///     <li><c>--disable-telemetry</c> via <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></li>
+        ///     <li><c>--display-name</c> via <see cref="AppCenterAppsCreateSettings.DisplayName"/></li>
+        ///     <li><c>--env</c> via <see cref="AppCenterAppsCreateSettings.Env"/></li>
+        ///     <li><c>--help</c> via <see cref="AppCenterAppsCreateSettings.Help"/></li>
+        ///     <li><c>--name</c> via <see cref="AppCenterAppsCreateSettings.Name"/></li>
+        ///     <li><c>--os</c> via <see cref="AppCenterAppsCreateSettings.OS"/></li>
+        ///     <li><c>--output</c> via <see cref="AppCenterAppsCreateSettings.Output"/></li>
+        ///     <li><c>--platform</c> via <see cref="AppCenterAppsCreateSettings.Platform"/></li>
+        ///     <li><c>--quiet</c> via <see cref="AppCenterAppsCreateSettings.Quiet"/></li>
+        ///     <li><c>--release-type</c> via <see cref="AppCenterAppsCreateSettings.ReleaseType"/></li>
+        ///     <li><c>--token</c> via <see cref="AppCenterAppsCreateSettings.Token"/></li>
+        ///     <li><c>--version</c> via <see cref="AppCenterAppsCreateSettings.Version"/></li>
+        ///   </ul>
+        /// </remarks>
+        public static IReadOnlyCollection<Output> AppCenterAppsCreate(Configure<AppCenterAppsCreateSettings> configurator)
+        {
+            return AppCenterAppsCreate(configurator(new AppCenterAppsCreateSettings()));
+        }
+        /// <summary>
+        ///   <p>Create a new app</p>
+        ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
+        /// </summary>
+        /// <remarks>
+        ///   <p>This is a <a href="http://www.nuke.build/docs/authoring-builds/cli-tools.html#fluent-apis">CLI wrapper with fluent API</a> that allows to modify the following arguments:</p>
+        ///   <ul>
+        ///     <li><c>--debug</c> via <see cref="AppCenterAppsCreateSettings.Debug"/></li>
+        ///     <li><c>--description</c> via <see cref="AppCenterAppsCreateSettings.Description"/></li>
+        ///     <li><c>--disable-telemetry</c> via <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></li>
+        ///     <li><c>--display-name</c> via <see cref="AppCenterAppsCreateSettings.DisplayName"/></li>
+        ///     <li><c>--env</c> via <see cref="AppCenterAppsCreateSettings.Env"/></li>
+        ///     <li><c>--help</c> via <see cref="AppCenterAppsCreateSettings.Help"/></li>
+        ///     <li><c>--name</c> via <see cref="AppCenterAppsCreateSettings.Name"/></li>
+        ///     <li><c>--os</c> via <see cref="AppCenterAppsCreateSettings.OS"/></li>
+        ///     <li><c>--output</c> via <see cref="AppCenterAppsCreateSettings.Output"/></li>
+        ///     <li><c>--platform</c> via <see cref="AppCenterAppsCreateSettings.Platform"/></li>
+        ///     <li><c>--quiet</c> via <see cref="AppCenterAppsCreateSettings.Quiet"/></li>
+        ///     <li><c>--release-type</c> via <see cref="AppCenterAppsCreateSettings.ReleaseType"/></li>
+        ///     <li><c>--token</c> via <see cref="AppCenterAppsCreateSettings.Token"/></li>
+        ///     <li><c>--version</c> via <see cref="AppCenterAppsCreateSettings.Version"/></li>
+        ///   </ul>
+        /// </remarks>
+        public static IEnumerable<(AppCenterAppsCreateSettings Settings, IReadOnlyCollection<Output> Output)> AppCenterAppsCreate(CombinatorialConfigure<AppCenterAppsCreateSettings> configurator, int degreeOfParallelism = 1, bool completeOnFailure = false)
+        {
+            return configurator.Invoke(AppCenterAppsCreate, AppCenterLogger, degreeOfParallelism, completeOnFailure);
+        }
+        /// <summary>
         ///   <p>Upload release binary and trigger distribution, at least one of --store or --group must be specified</p>
         ///   <p>For more details, visit the <a href="https://github.com/Microsoft/appcenter-cli/">official website</a>.</p>
         /// </summary>
@@ -403,6 +487,98 @@ namespace Nuke.Common.Tools.AppCenter
         {
             arguments
               .Add("logout")
+              .Add("--disable-telemetry", DisableTelemetry)
+              .Add("--version", Version)
+              .Add("--quiet", Quiet)
+              .Add("--help", Help)
+              .Add("--env {value}", Env)
+              .Add("--token {value}", Token, secret: true)
+              .Add("--output {value}", Output)
+              .Add("--debug", Debug);
+            return base.ConfigureProcessArguments(arguments);
+        }
+    }
+    #endregion
+    #region AppCenterAppsCreateSettings
+    /// <summary>
+    ///   Used within <see cref="AppCenterTasks"/>.
+    /// </summary>
+    [PublicAPI]
+    [ExcludeFromCodeCoverage]
+    [Serializable]
+    public partial class AppCenterAppsCreateSettings : ToolSettings
+    {
+        /// <summary>
+        ///   Path to the AppCenter executable.
+        /// </summary>
+        public override string ProcessToolPath => base.ProcessToolPath ?? AppCenterTasks.AppCenterPath;
+        public override Action<OutputType, string> ProcessCustomLogger => AppCenterTasks.AppCenterLogger;
+        /// <summary>
+        ///   The platform of the app. Supported values: Cordova, Java, Objective-C-Swift, React-Native, Unity, UWP, WinForms, WPF, Xamarin, Custom
+        /// </summary>
+        public virtual AppCenterAppsCreatePlatform Platform { get; internal set; }
+        /// <summary>
+        ///   The OS the app will be running on. Supported values: Android, Custom, iOS, macOS, tvOS, Windows
+        /// </summary>
+        public virtual AppCenterAppsCreateOS OS { get; internal set; }
+        /// <summary>
+        ///   The descriptive name of the app. This can contain any characters
+        /// </summary>
+        public virtual string DisplayName { get; internal set; }
+        /// <summary>
+        ///   The app release type. Suggested values are Alpha, Beta, Production, Store, Enterprise. Custom values are allowed and must be must be one word, alphanumeric, first letter capitalized.
+        /// </summary>
+        public virtual AppCenterAppsCreateReleaseType ReleaseType { get; internal set; }
+        /// <summary>
+        ///   The name of the app used in URLs. Can optionally be provided specifically, otherwise a generated name will be derived from display-name
+        /// </summary>
+        public virtual string Name { get; internal set; }
+        /// <summary>
+        ///   The description of the app
+        /// </summary>
+        public virtual string Description { get; internal set; }
+        /// <summary>
+        ///   Disable telemetry for this command
+        /// </summary>
+        public virtual bool? DisableTelemetry { get; internal set; }
+        /// <summary>
+        ///   Display AppCenter version
+        /// </summary>
+        public virtual bool? Version { get; internal set; }
+        /// <summary>
+        ///   Auto-confirm any prompts without waiting for input
+        /// </summary>
+        public virtual bool? Quiet { get; internal set; }
+        /// <summary>
+        ///   Display help for current command
+        /// </summary>
+        public virtual bool? Help { get; internal set; }
+        /// <summary>
+        ///   Environment when using API token
+        /// </summary>
+        public virtual string Env { get; internal set; }
+        /// <summary>
+        ///   API token
+        /// </summary>
+        public virtual string Token { get; internal set; }
+        /// <summary>
+        ///   Output format: json
+        /// </summary>
+        public virtual AppCenterDistributeReleaseOutput Output { get; internal set; }
+        /// <summary>
+        ///   Display extra output for debugging
+        /// </summary>
+        public virtual bool? Debug { get; internal set; }
+        protected override Arguments ConfigureProcessArguments(Arguments arguments)
+        {
+            arguments
+              .Add("apps create")
+              .Add("--platform {value}", Platform)
+              .Add("--os {value}", OS)
+              .Add("--display-name {value}", DisplayName)
+              .Add("--release-type {value}", ReleaseType)
+              .Add("--name {value}", Name)
+              .Add("--description {value}", Description)
               .Add("--disable-telemetry", DisableTelemetry)
               .Add("--version", Version)
               .Add("--quiet", Quiet)
@@ -1315,6 +1491,517 @@ namespace Nuke.Common.Tools.AppCenter
         #endregion
     }
     #endregion
+    #region AppCenterAppsCreateSettingsExtensions
+    /// <summary>
+    ///   Used within <see cref="AppCenterTasks"/>.
+    /// </summary>
+    [PublicAPI]
+    [ExcludeFromCodeCoverage]
+    public static partial class AppCenterAppsCreateSettingsExtensions
+    {
+        #region Platform
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Platform"/></em></p>
+        ///   <p>The platform of the app. Supported values: Cordova, Java, Objective-C-Swift, React-Native, Unity, UWP, WinForms, WPF, Xamarin, Custom</p>
+        /// </summary>
+        [Pure]
+        public static T SetPlatform<T>(this T toolSettings, AppCenterAppsCreatePlatform platform) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Platform = platform;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Platform"/></em></p>
+        ///   <p>The platform of the app. Supported values: Cordova, Java, Objective-C-Swift, React-Native, Unity, UWP, WinForms, WPF, Xamarin, Custom</p>
+        /// </summary>
+        [Pure]
+        public static T ResetPlatform<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Platform = null;
+            return toolSettings;
+        }
+        #endregion
+        #region OS
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.OS"/></em></p>
+        ///   <p>The OS the app will be running on. Supported values: Android, Custom, iOS, macOS, tvOS, Windows</p>
+        /// </summary>
+        [Pure]
+        public static T SetOS<T>(this T toolSettings, AppCenterAppsCreateOS os) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.OS = os;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.OS"/></em></p>
+        ///   <p>The OS the app will be running on. Supported values: Android, Custom, iOS, macOS, tvOS, Windows</p>
+        /// </summary>
+        [Pure]
+        public static T ResetOS<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.OS = null;
+            return toolSettings;
+        }
+        #endregion
+        #region DisplayName
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.DisplayName"/></em></p>
+        ///   <p>The descriptive name of the app. This can contain any characters</p>
+        /// </summary>
+        [Pure]
+        public static T SetDisplayName<T>(this T toolSettings, string displayName) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisplayName = displayName;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.DisplayName"/></em></p>
+        ///   <p>The descriptive name of the app. This can contain any characters</p>
+        /// </summary>
+        [Pure]
+        public static T ResetDisplayName<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisplayName = null;
+            return toolSettings;
+        }
+        #endregion
+        #region ReleaseType
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.ReleaseType"/></em></p>
+        ///   <p>The app release type. Suggested values are Alpha, Beta, Production, Store, Enterprise. Custom values are allowed and must be must be one word, alphanumeric, first letter capitalized.</p>
+        /// </summary>
+        [Pure]
+        public static T SetReleaseType<T>(this T toolSettings, AppCenterAppsCreateReleaseType releaseType) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.ReleaseType = releaseType;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.ReleaseType"/></em></p>
+        ///   <p>The app release type. Suggested values are Alpha, Beta, Production, Store, Enterprise. Custom values are allowed and must be must be one word, alphanumeric, first letter capitalized.</p>
+        /// </summary>
+        [Pure]
+        public static T ResetReleaseType<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.ReleaseType = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Name
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Name"/></em></p>
+        ///   <p>The name of the app used in URLs. Can optionally be provided specifically, otherwise a generated name will be derived from display-name</p>
+        /// </summary>
+        [Pure]
+        public static T SetName<T>(this T toolSettings, string name) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Name = name;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Name"/></em></p>
+        ///   <p>The name of the app used in URLs. Can optionally be provided specifically, otherwise a generated name will be derived from display-name</p>
+        /// </summary>
+        [Pure]
+        public static T ResetName<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Name = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Description
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Description"/></em></p>
+        ///   <p>The description of the app</p>
+        /// </summary>
+        [Pure]
+        public static T SetDescription<T>(this T toolSettings, string description) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Description = description;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Description"/></em></p>
+        ///   <p>The description of the app</p>
+        /// </summary>
+        [Pure]
+        public static T ResetDescription<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Description = null;
+            return toolSettings;
+        }
+        #endregion
+        #region DisableTelemetry
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T SetDisableTelemetry<T>(this T toolSettings, bool? disableTelemetry) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = disableTelemetry;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T ResetDisableTelemetry<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T EnableDisableTelemetry<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T DisableDisableTelemetry<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterAppsCreateSettings.DisableTelemetry"/></em></p>
+        ///   <p>Disable telemetry for this command</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleDisableTelemetry<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.DisableTelemetry = !toolSettings.DisableTelemetry;
+            return toolSettings;
+        }
+        #endregion
+        #region Version
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T SetVersion<T>(this T toolSettings, bool? version) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = version;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T ResetVersion<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterAppsCreateSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T EnableVersion<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterAppsCreateSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T DisableVersion<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterAppsCreateSettings.Version"/></em></p>
+        ///   <p>Display AppCenter version</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleVersion<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Version = !toolSettings.Version;
+            return toolSettings;
+        }
+        #endregion
+        #region Quiet
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T SetQuiet<T>(this T toolSettings, bool? quiet) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = quiet;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T ResetQuiet<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterAppsCreateSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T EnableQuiet<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterAppsCreateSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T DisableQuiet<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterAppsCreateSettings.Quiet"/></em></p>
+        ///   <p>Auto-confirm any prompts without waiting for input</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleQuiet<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Quiet = !toolSettings.Quiet;
+            return toolSettings;
+        }
+        #endregion
+        #region Help
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T SetHelp<T>(this T toolSettings, bool? help) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = help;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T ResetHelp<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterAppsCreateSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T EnableHelp<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterAppsCreateSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T DisableHelp<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterAppsCreateSettings.Help"/></em></p>
+        ///   <p>Display help for current command</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleHelp<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Help = !toolSettings.Help;
+            return toolSettings;
+        }
+        #endregion
+        #region Env
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Env"/></em></p>
+        ///   <p>Environment when using API token</p>
+        /// </summary>
+        [Pure]
+        public static T SetEnv<T>(this T toolSettings, string env) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Env = env;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Env"/></em></p>
+        ///   <p>Environment when using API token</p>
+        /// </summary>
+        [Pure]
+        public static T ResetEnv<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Env = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Token
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Token"/></em></p>
+        ///   <p>API token</p>
+        /// </summary>
+        [Pure]
+        public static T SetToken<T>(this T toolSettings, [Secret] string token) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Token = token;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Token"/></em></p>
+        ///   <p>API token</p>
+        /// </summary>
+        [Pure]
+        public static T ResetToken<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Token = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Output
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Output"/></em></p>
+        ///   <p>Output format: json</p>
+        /// </summary>
+        [Pure]
+        public static T SetOutput<T>(this T toolSettings, AppCenterDistributeReleaseOutput output) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Output = output;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Output"/></em></p>
+        ///   <p>Output format: json</p>
+        /// </summary>
+        [Pure]
+        public static T ResetOutput<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Output = null;
+            return toolSettings;
+        }
+        #endregion
+        #region Debug
+        /// <summary>
+        ///   <p><em>Sets <see cref="AppCenterAppsCreateSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T SetDebug<T>(this T toolSettings, bool? debug) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = debug;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Resets <see cref="AppCenterAppsCreateSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T ResetDebug<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = null;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Enables <see cref="AppCenterAppsCreateSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T EnableDebug<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = true;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Disables <see cref="AppCenterAppsCreateSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T DisableDebug<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = false;
+            return toolSettings;
+        }
+        /// <summary>
+        ///   <p><em>Toggles <see cref="AppCenterAppsCreateSettings.Debug"/></em></p>
+        ///   <p>Display extra output for debugging</p>
+        /// </summary>
+        [Pure]
+        public static T ToggleDebug<T>(this T toolSettings) where T : AppCenterAppsCreateSettings
+        {
+            toolSettings = toolSettings.NewInstance();
+            toolSettings.Debug = !toolSettings.Debug;
+            return toolSettings;
+        }
+        #endregion
+    }
+    #endregion
     #region AppCenterDistributeReleaseSettingsExtensions
     /// <summary>
     ///   Used within <see cref="AppCenterTasks"/>.
@@ -2067,6 +2754,73 @@ namespace Nuke.Common.Tools.AppCenter
             return toolSettings;
         }
         #endregion
+    }
+    #endregion
+    #region AppCenterAppsCreatePlatform
+    /// <summary>
+    ///   Used within <see cref="AppCenterTasks"/>.
+    /// </summary>
+    [PublicAPI]
+    [Serializable]
+    [ExcludeFromCodeCoverage]
+    [TypeConverter(typeof(TypeConverter<AppCenterAppsCreatePlatform>))]
+    public partial class AppCenterAppsCreatePlatform : Enumeration
+    {
+        public static AppCenterAppsCreatePlatform Cordova = (AppCenterAppsCreatePlatform) "Cordova";
+        public static AppCenterAppsCreatePlatform Java = (AppCenterAppsCreatePlatform) "Java";
+        public static AppCenterAppsCreatePlatform Objective_C_Swift = (AppCenterAppsCreatePlatform) "Objective-C-Swift";
+        public static AppCenterAppsCreatePlatform React_Native = (AppCenterAppsCreatePlatform) "React-Native";
+        public static AppCenterAppsCreatePlatform Unity = (AppCenterAppsCreatePlatform) "Unity";
+        public static AppCenterAppsCreatePlatform UWP = (AppCenterAppsCreatePlatform) "UWP";
+        public static AppCenterAppsCreatePlatform Xamarin = (AppCenterAppsCreatePlatform) "Xamarin";
+        public static AppCenterAppsCreatePlatform Custom = (AppCenterAppsCreatePlatform) "Custom";
+        public static implicit operator AppCenterAppsCreatePlatform(string value)
+        {
+            return new AppCenterAppsCreatePlatform { Value = value };
+        }
+    }
+    #endregion
+    #region AppCenterAppsCreateOs
+    /// <summary>
+    ///   Used within <see cref="AppCenterTasks"/>.
+    /// </summary>
+    [PublicAPI]
+    [Serializable]
+    [ExcludeFromCodeCoverage]
+    [TypeConverter(typeof(TypeConverter<AppCenterAppsCreateOs>))]
+    public partial class AppCenterAppsCreateOs : Enumeration
+    {
+        public static AppCenterAppsCreateOs Android = (AppCenterAppsCreateOs) "Android";
+        public static AppCenterAppsCreateOs Custom = (AppCenterAppsCreateOs) "Custom";
+        public static AppCenterAppsCreateOs iOS = (AppCenterAppsCreateOs) "iOS";
+        public static AppCenterAppsCreateOs macOS = (AppCenterAppsCreateOs) "macOS";
+        public static AppCenterAppsCreateOs tvOS = (AppCenterAppsCreateOs) "tvOS";
+        public static AppCenterAppsCreateOs Windows = (AppCenterAppsCreateOs) "Windows";
+        public static implicit operator AppCenterAppsCreateOs(string value)
+        {
+            return new AppCenterAppsCreateOs { Value = value };
+        }
+    }
+    #endregion
+    #region AppCenterAppsCreateReleaseType
+    /// <summary>
+    ///   Used within <see cref="AppCenterTasks"/>.
+    /// </summary>
+    [PublicAPI]
+    [Serializable]
+    [ExcludeFromCodeCoverage]
+    [TypeConverter(typeof(TypeConverter<AppCenterAppsCreateReleaseType>))]
+    public partial class AppCenterAppsCreateReleaseType : Enumeration
+    {
+        public static AppCenterAppsCreateReleaseType Alpha = (AppCenterAppsCreateReleaseType) "Alpha";
+        public static AppCenterAppsCreateReleaseType Beta = (AppCenterAppsCreateReleaseType) "Beta";
+        public static AppCenterAppsCreateReleaseType Production = (AppCenterAppsCreateReleaseType) "Production";
+        public static AppCenterAppsCreateReleaseType Store = (AppCenterAppsCreateReleaseType) "Store";
+        public static AppCenterAppsCreateReleaseType Enterprise = (AppCenterAppsCreateReleaseType) "Enterprise";
+        public static implicit operator AppCenterAppsCreateReleaseType(string value)
+        {
+            return new AppCenterAppsCreateReleaseType { Value = value };
+        }
     }
     #endregion
     #region AppCenterDistributeReleaseOutput
